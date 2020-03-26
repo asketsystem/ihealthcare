@@ -4,6 +4,7 @@ import 'package:go_away_covid19/ui/home/global/GlobalPage.dart';
 import 'package:go_away_covid19/ui/home/map/MapPage.dart';
 import 'package:go_away_covid19/ui/home/news/NewsPage.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
+import 'package:go_away_covid19/util/StyleUtil.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,14 +12,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final List<Widget> screens = [GlobalPage(), FaqPage(), NewsPage(), MapPage()];
   Widget currentScreen = GlobalPage();
   final PageStorageBucket bucket = PageStorageBucket();
   int currentTab = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.light,
+        backgroundColor: getPageBackgroundColor(),
+        title: Row(
+          children: <Widget>[
+            Container(
+              height: 30,
+              width: 100,
+              child: Hero(
+                  tag: "ic_goaway",
+                  child: Image.asset(
+                    'images/ic_go_away.png',
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            Spacer(),
+            Text('GLOBAL', style: getPageTitleTextStyle(18.0))
+          ],
+        ),
+      ),
       body: PageStorage(
         child: currentScreen,
         bucket: bucket,
