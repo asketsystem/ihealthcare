@@ -20,6 +20,15 @@ getWorldWideCountdownNumberStyle() {
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.w300);
 }
 
+getDeathCountdownNumberStyle() {
+  return TextStyle(
+      color: Color(0xFFF73E3E), fontSize: 20, fontWeight: FontWeight.w300);
+}
+
 getConfirmedRecoveredTextStyle() {
   return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w400);
+}
+
+getDeathTitleTextStyle() {
+  return TextStyle(color: Color(0xFFF73E3E), fontWeight: FontWeight.w400);
 }

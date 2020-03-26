@@ -5,4 +5,5 @@ class Repository {
   var apiProvider = ApiProvider();
 
   Future<RpGlobal> getGlobalData() => apiProvider.getGlobalData();
+  Future<RpGlobal> getUserCountryData(String countryCode) => apiProvider.getUserCountryData(countryCode);
 }

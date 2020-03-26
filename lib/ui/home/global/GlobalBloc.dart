@@ -7,7 +7,7 @@ final bloc = GlobalBloc();
 class GlobalBloc {
   final _repository = Repository();
 
-  final globalFetcher = PublishSubject<RpGlobal>();
+  final globalFetcher = BehaviorSubject<RpGlobal>();
 
   Stream<RpGlobal> get allAbout => globalFetcher.stream;
 

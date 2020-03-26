@@ -23,4 +23,18 @@ class ApiProvider {
       throw Exception('Failed to get global data');
     }
   }
+
+  Future<RpGlobal> getUserCountryData(String countryCode) async {
+    print('getUserCountryData()');
+    var response = await client.get('$_covid19DataSource/locations?country_code=$countryCode',
+        headers: {HttpHeaders.acceptHeader: "application/json"});
+
+    print("user country data response: ${response.body.toString()}");
+
+    if (response.statusCode == 200) {
+      return RpGlobal.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to get user country data');
+    }
+  }
 }
