@@ -23,8 +23,7 @@ class _HomePageState extends State<HomePage> {
         child: currentScreen,
         bucket: bucket,
       ),
-      bottomNavigationBar: Container(
-          margin: EdgeInsets.only(top: 5), child: getBottomNavigationBar()),
+      bottomNavigationBar: getBottomNavigationBar(),
     );
   }
 
@@ -32,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currentTab,
+      backgroundColor: getBottomNavigationBarColor(),
       showSelectedLabels: false,
       showUnselectedLabels: false,
       items: [

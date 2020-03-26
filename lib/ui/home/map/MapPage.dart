@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_away_covid19/util/ColorUtil.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -9,8 +10,11 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Text('Map Page'),
+      backgroundColor: getPageBackgroundColor(),
+      body: Center(
+        child: Container(
+          child: Text('Map Page'),
+        ),
       ),
     );
   }

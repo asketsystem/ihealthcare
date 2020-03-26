@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_away_covid19/util/ColorUtil.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -9,8 +10,9 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: getPageBackgroundColor(),
       body: Container(
-        child: Text('News Page'),
+        child: Center(child: Text('News Page')),
       ),
     );
   }
