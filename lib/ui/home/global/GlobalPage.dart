@@ -18,6 +18,7 @@ class _GlobalPageState extends State<GlobalPage> {
   var _repository = Repository();
   var _userCountryData = RpUserCountryData();
   var _worldWideLatest = RpLatest();
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +33,6 @@ class _GlobalPageState extends State<GlobalPage> {
 
   @override
   Widget build(BuildContext context) {
-
     _repository.getGloballyLatestData().then((response) {
       _worldWideLatest = response;
     });
@@ -64,7 +64,6 @@ class _GlobalPageState extends State<GlobalPage> {
         scrollDirection: Axis.vertical,
         itemCount: allCountryData.length, //2 is for above list
         itemBuilder: (context, index) {
-
           var country = allCountryData[index];
 
           if (index == 0) {
@@ -256,45 +255,64 @@ class _GlobalPageState extends State<GlobalPage> {
   }
 
   Widget buildSingleCountryView(Country country) {
-
     print('flag: ${country.countryInfo.flag}');
 
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Container(
-          height: 80,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  blurRadius: 15.0,
-                ),
-              ]),
-      child: Row(
-        children: <Widget>[
-          SizedBox(width: 25,),
-          Container(
-            height: 35,
-            width: 55,
-            child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    Container(color: Colors.grey[200],),
-                errorWidget: (context, url, error) => Container(
-                    color: Colors.grey.withOpacity(0.2),
-                    child: Center(child: Icon(Icons.broken_image, size: 50.0, color: Colors.grey.withOpacity(0.5),))),
-                imageUrl:
-                "${country.countryInfo.flag}"),
-          ),
-          SizedBox(width: 25,),
-          Text('${country.country}', style: getCountryNameInListStyle()),
-          Spacer(),
-          Center(child: Text('+${country.todayCases}', style: getCountryInListCasesStyle(),)),
-          SizedBox(width: 25)
-        ],
-      ),),
+        height: 80,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                blurRadius: 15.0,
+              ),
+            ]),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 25,
+            ),
+            Container(
+              height: 35,
+              width: 55,
+              child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                        color: Colors.grey[200],
+                      ),
+                  errorWidget: (context, url, error) => Container(
+                      color: Colors.grey.withOpacity(0.2),
+                      child: Center(
+                          child: Icon(
+                        Icons.broken_image,
+                        size: 50.0,
+                        color: Colors.grey.withOpacity(0.5),
+                      ))),
+                  imageUrl: "${country.countryInfo.flag}"),
+            ),
+            SizedBox(
+              width: 25,
+            ),
+            Text('${getOnlyCountryName(country.country)}',
+                style: getCountryNameInListStyle()),
+            Spacer(),
+            Center(
+                child: Text(
+              '${country.cases}',
+              style: getCountryInListCasesStyle(),
+            )),
+            SizedBox(width: 25)
+          ],
+        ),
+      ),
     );
+  }
+
+  String getOnlyCountryName(String country) {
+    var splits = country.split(",");
+    return splits[0];
   }
 }
