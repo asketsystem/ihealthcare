@@ -32,3 +32,11 @@ getConfirmedRecoveredTextStyle() {
 getDeathTitleTextStyle() {
   return TextStyle(color: Color(0xFFF73E3E), fontWeight: FontWeight.w400);
 }
+
+getCountryInListCasesStyle() {
+  return TextStyle(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14);
+}
+
+getCountryNameInListStyle() {
+  return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w600, fontSize: 14);
+}

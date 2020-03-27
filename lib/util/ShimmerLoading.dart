@@ -7,7 +7,7 @@ getListOfLoadingShimmer() {
       highlightColor: Colors.grey[100],
       enabled: true,
       child: ListView.builder(
-          itemCount: 5,
+          itemCount: 8,
           itemBuilder: (context, index) {
             if (index == 0 || index == 1) {
               return Container(

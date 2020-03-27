@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_away_covid19/models/RpGlobal.dart';
 import 'package:go_away_covid19/models/RpLatest.dart';
@@ -255,6 +256,9 @@ class _GlobalPageState extends State<GlobalPage> {
   }
 
   Widget buildSingleCountryView(Country country) {
+
+    print('flag: ${country.countryInfo.flag}');
+
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Container(
@@ -267,7 +271,30 @@ class _GlobalPageState extends State<GlobalPage> {
                   color: Colors.grey.withOpacity(0.1),
                   blurRadius: 15.0,
                 ),
-              ])),
+              ]),
+      child: Row(
+        children: <Widget>[
+          SizedBox(width: 25,),
+          Container(
+            height: 35,
+            width: 55,
+            child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    Container(color: Colors.grey[200],),
+                errorWidget: (context, url, error) => Container(
+                    color: Colors.grey.withOpacity(0.2),
+                    child: Center(child: Icon(Icons.broken_image, size: 50.0, color: Colors.grey.withOpacity(0.5),))),
+                imageUrl:
+                "${country.countryInfo.flag}"),
+          ),
+          SizedBox(width: 25,),
+          Text('${country.country}', style: getCountryNameInListStyle()),
+          Spacer(),
+          Center(child: Text('+${country.todayCases}', style: getCountryInListCasesStyle(),)),
+          SizedBox(width: 25)
+        ],
+      ),),
     );
   }
 }
