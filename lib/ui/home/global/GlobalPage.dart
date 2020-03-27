@@ -22,17 +22,7 @@ class _GlobalPageState extends State<GlobalPage> {
   @override
   void initState() {
     super.initState();
-    bloc.getGlobalData();
-  }
 
-  @override
-  void dispose() {
-//    bloc.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     _repository.getGloballyLatestData().then((response) {
       _worldWideLatest = response;
     });
@@ -40,6 +30,13 @@ class _GlobalPageState extends State<GlobalPage> {
     _repository.getUserCountryData("bangladesh").then((response) {
       _userCountryData = response;
     });
+
+    bloc.getGlobalData();
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       backgroundColor: getPageBackgroundColor(),
@@ -184,7 +181,7 @@ class _GlobalPageState extends State<GlobalPage> {
             child: Container(
               margin: EdgeInsets.only(left: 25, top: 16),
               child: Text(
-                '${userCountryData.country.toUpperCase()}',
+                '${userCountryData.country == null ? "LOADING..." : userCountryData.country.toUpperCase()}',
                 style: getWorldWideTextStyle(18),
               ),
             ),

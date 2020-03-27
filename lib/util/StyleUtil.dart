@@ -40,3 +40,11 @@ getCountryInListCasesStyle() {
 getCountryNameInListStyle() {
   return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w600, fontSize: 14);
 }
+
+getFaqTitleStyle() {
+  return TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16);
+}
+
+getFaqSubttileStyle() {
+  return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w500, fontSize: 14);
+}
