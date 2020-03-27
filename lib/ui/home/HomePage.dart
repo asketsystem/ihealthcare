@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: getPageBackgroundColor(),
+        backgroundColor: currentTab == 3 ? Colors.white : getPageBackgroundColor(),
         title: Row(
           children: <Widget>[
             Container(

@@ -46,7 +46,7 @@ class ApiProvider {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
-    print('getNewses() from: http://newsapi.org/v2/everything?q=COVID&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en');
+    print('getNewses() from: http://newsapi.org/v2/everything?q=coronavirus&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en');
     var response = await client.get('http://newsapi.org/v2/everything?q=COVID&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
