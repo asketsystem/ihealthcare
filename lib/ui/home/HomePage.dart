@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final List<Widget> screens = [GlobalPage(), FaqPage(), NewsPage(), MapPage()];
   Widget currentScreen = GlobalPage();
   final PageStorageBucket bucket = PageStorageBucket();
@@ -43,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                   )),
             ),
             Spacer(),
-            Text('GLOBAL', style: getPageTitleTextStyle(18.0))
+            Text(getPageTitle(currentTab), style: getPageTitleTextStyle(18.0))
           ],
         ),
       ),
@@ -115,5 +114,27 @@ class _HomePageState extends State<HomePage> {
         });
       },
     );
+  }
+
+  String getPageTitle(int currentTab) {
+    var pageTitle = "GLOBAL";
+    switch (currentTab) {
+      case 0:
+        pageTitle = 'GLOBAL';
+        break;
+      case 1:
+        pageTitle = 'FAQ';
+        break;
+      case 2:
+        pageTitle = 'NEWS';
+        break;
+      case 3:
+        pageTitle = 'MAP';
+        break;
+    }
+    setState(() {
+      pageTitle = pageTitle;
+    });
+    return pageTitle;
   }
 }
