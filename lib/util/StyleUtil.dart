@@ -34,17 +34,26 @@ getDeathTitleTextStyle() {
 }
 
 getCountryInListCasesStyle() {
-  return TextStyle(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14);
+  return TextStyle(
+      color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14);
 }
 
 getCountryNameInListStyle() {
-  return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w600, fontSize: 14);
+  return TextStyle(
+      color: Color(0xFFBEC0C6), fontWeight: FontWeight.w600, fontSize: 14);
 }
 
 getFaqTitleStyle() {
-  return TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16);
+  return TextStyle(
+      color: Color(0xFF2E3D5F), fontWeight: FontWeight.w600, fontSize: 16);
 }
 
-getFaqSubttileStyle() {
-  return TextStyle(color: Color(0xFFBEC0C6), fontWeight: FontWeight.w500, fontSize: 14);
+getFaqSubtitleStyle() {
+  return TextStyle(
+      color: Color(0xFFBEC0C6), fontWeight: FontWeight.w500, fontSize: 14);
+}
+
+getNewsTitleStyle() {
+  return TextStyle(
+      color: Color(0xFF2E3D5F), fontWeight: FontWeight.w600, fontSize: 14,);
 }

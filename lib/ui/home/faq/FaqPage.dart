@@ -92,7 +92,7 @@ class _FaqPageState extends State<FaqPage> {
                   alignment: Alignment.bottomLeft,
                   child: Text(
                     subtitle,
-                    style: getFaqSubttileStyle(),
+                    style: getFaqSubtitleStyle(),
                   ),
                 ),
               ],
