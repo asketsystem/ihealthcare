@@ -7,12 +7,12 @@ final bloc = GlobalBloc();
 class GlobalBloc {
   final _repository = Repository();
 
-  final globalFetcher = BehaviorSubject<RpGlobal>();
+  final globalFetcher = BehaviorSubject<List<Country>>();
 
-  Stream<RpGlobal> get allAbout => globalFetcher.stream;
+  Stream<List<Country>> get allAbout => globalFetcher.stream;
 
   getGlobalData() async {
-    RpGlobal global = await _repository.getGlobalData();
+    List<Country> global = await _repository.getAllCountriesData();
     globalFetcher.sink.add(global);
   }
 

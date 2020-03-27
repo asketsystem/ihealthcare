@@ -5,41 +5,29 @@ RpLatest rpLatestFromJson(String str) => RpLatest.fromJson(json.decode(str));
 String rpLatestToJson(RpLatest data) => json.encode(data.toJson());
 
 class RpLatest {
-  Latest latest;
+  int cases;
+  int deaths;
+  int recovered;
+  int updated;
 
   RpLatest({
-    this.latest,
+    this.cases,
+    this.deaths,
+    this.recovered,
+    this.updated,
   });
 
   factory RpLatest.fromJson(Map<String, dynamic> json) => RpLatest(
-    latest: Latest.fromJson(json["latest"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "latest": latest.toJson(),
-  };
-}
-
-class Latest {
-  int confirmed;
-  int deaths;
-  int recovered;
-
-  Latest({
-    this.confirmed,
-    this.deaths,
-    this.recovered,
-  });
-
-  factory Latest.fromJson(Map<String, dynamic> json) => Latest(
-    confirmed: json["confirmed"],
+    cases: json["cases"],
     deaths: json["deaths"],
     recovered: json["recovered"],
+    updated: json["updated"],
   );
 
   Map<String, dynamic> toJson() => {
-    "confirmed": confirmed,
+    "cases": cases,
     "deaths": deaths,
     "recovered": recovered,
+    "updated": updated,
   };
 }

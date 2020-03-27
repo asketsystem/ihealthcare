@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_away_covid19/models/RpGlobal.dart';
+import 'package:go_away_covid19/models/RpLatest.dart';
+import 'package:go_away_covid19/models/RpUserCountry.dart';
 import 'package:go_away_covid19/network/Repository.dart';
 import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
@@ -13,9 +15,8 @@ class GlobalPage extends StatefulWidget {
 
 class _GlobalPageState extends State<GlobalPage> {
   var _repository = Repository();
-  var _userCountry = Location();
-  var _userCountryLatest = Latest();
-
+  var _userCountryData = RpUserCountryData();
+  var _worldWideLatest = RpLatest();
   @override
   void initState() {
     super.initState();
@@ -31,16 +32,19 @@ class _GlobalPageState extends State<GlobalPage> {
   @override
   Widget build(BuildContext context) {
 
-    _repository.getUserCountryData("BD").then((response) {
-      _userCountryLatest = response.latest;
-      _userCountry = response.locations[0];
+    _repository.getGloballyLatestData().then((response) {
+      _worldWideLatest = response;
+    });
+
+    _repository.getUserCountryData("bangladesh").then((response) {
+      _userCountryData = response;
     });
 
     return Scaffold(
       backgroundColor: getPageBackgroundColor(),
       body: StreamBuilder(
         stream: bloc.globalFetcher,
-        builder: (context, AsyncSnapshot<RpGlobal> snapshot) {
+        builder: (context, AsyncSnapshot<List<Country>> snapshot) {
           if (snapshot.hasData) {
             return buildList(snapshot.data);
           } else if (snapshot.hasError) {
@@ -54,23 +58,25 @@ class _GlobalPageState extends State<GlobalPage> {
     );
   }
 
-  Widget buildList(RpGlobal data) {
+  Widget buildList(List<Country> allCountryData) {
     return ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: data.locations.length + 2, //2 is for above list
+        itemCount: allCountryData.length, //2 is for above list
         itemBuilder: (context, index) {
-          var country = data.locations[index];
+
+          var country = allCountryData[index];
+
           if (index == 0) {
-            return buildGlobalView(data.latest);
+            return buildGlobalView(_worldWideLatest);
           } else if (index == 1) {
-            return buildUserCountryView(_userCountryLatest);
+            return buildUserCountryView(_userCountryData);
           } else {
             return buildSingleCountryView(country);
           }
         });
   }
 
-  Widget buildGlobalView(Latest latest) {
+  Widget buildGlobalView(RpLatest latest) {
     return Container(
       margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       decoration: BoxDecoration(
@@ -104,7 +110,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${latest.confirmed}',
+                      '${latest.cases}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -159,7 +165,7 @@ class _GlobalPageState extends State<GlobalPage> {
     );
   }
 
-  Widget buildUserCountryView(Latest userCountryLatest) {
+  Widget buildUserCountryView(RpUserCountryData userCountryData) {
     return Container(
       margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       decoration: BoxDecoration(
@@ -178,7 +184,7 @@ class _GlobalPageState extends State<GlobalPage> {
             child: Container(
               margin: EdgeInsets.only(left: 25, top: 16),
               child: Text(
-                '${_userCountry.country.toUpperCase()}',
+                '${userCountryData.country.toUpperCase()}',
                 style: getWorldWideTextStyle(18),
               ),
             ),
@@ -193,7 +199,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${userCountryLatest.confirmed}',
+                      '${userCountryData.cases}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -209,7 +215,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${userCountryLatest.recovered == 0 ? '0000' : userCountryLatest.recovered}',
+                      '${userCountryData.recovered}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -225,7 +231,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${userCountryLatest.deaths}',
+                      '${userCountryData.deaths}',
                       style: getDeathCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -248,7 +254,7 @@ class _GlobalPageState extends State<GlobalPage> {
     );
   }
 
-  Widget buildSingleCountryView(Location country) {
+  Widget buildSingleCountryView(Country country) {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Container(

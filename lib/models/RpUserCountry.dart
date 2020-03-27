@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-List<Country> rpAllCountriesFromJson(String str) => List<Country>.from(json.decode(str).map((x) => Country.fromJson(x)));
+RpUserCountryData rpUserCountryDataFromJson(String str) => RpUserCountryData.fromJson(json.decode(str));
 
-String rpAllCountriesToJson(List<Country> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String rpUserCountryDataToJson(RpUserCountryData data) => json.encode(data.toJson());
 
-class Country {
+class RpUserCountryData {
   String country;
   CountryInfo countryInfo;
   int cases;
@@ -17,7 +17,7 @@ class Country {
   double casesPerOneMillion;
   double deathsPerOneMillion;
 
-  Country({
+  RpUserCountryData({
     this.country,
     this.countryInfo,
     this.cases,
@@ -31,7 +31,7 @@ class Country {
     this.deathsPerOneMillion,
   });
 
-  factory Country.fromJson(Map<String, dynamic> json) => Country(
+  factory RpUserCountryData.fromJson(Map<String, dynamic> json) => RpUserCountryData(
     country: json["country"],
     countryInfo: CountryInfo.fromJson(json["countryInfo"]),
     cases: json["cases"],
@@ -41,8 +41,8 @@ class Country {
     recovered: json["recovered"],
     active: json["active"],
     critical: json["critical"],
-    casesPerOneMillion: json["casesPerOneMillion"] == null ? null : json["casesPerOneMillion"].toDouble(),
-    deathsPerOneMillion: json["deathsPerOneMillion"] == null ? null : json["deathsPerOneMillion"].toDouble(),
+    casesPerOneMillion: json["casesPerOneMillion"].toDouble(),
+    deathsPerOneMillion: json["deathsPerOneMillion"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -55,15 +55,15 @@ class Country {
     "recovered": recovered,
     "active": active,
     "critical": critical,
-    "casesPerOneMillion": casesPerOneMillion == null ? null : casesPerOneMillion,
-    "deathsPerOneMillion": deathsPerOneMillion == null ? null : deathsPerOneMillion,
+    "casesPerOneMillion": casesPerOneMillion,
+    "deathsPerOneMillion": deathsPerOneMillion,
   };
 }
 
 class CountryInfo {
   int id;
-  double lat;
-  double long;
+  int lat;
+  int long;
   String flag;
   String iso3;
   String iso2;
@@ -78,20 +78,20 @@ class CountryInfo {
   });
 
   factory CountryInfo.fromJson(Map<String, dynamic> json) => CountryInfo(
-    id: json["_id"] == null ? null : json["_id"],
-    lat: json["lat"].toDouble(),
-    long: json["long"].toDouble(),
+    id: json["_id"],
+    lat: json["lat"],
+    long: json["long"],
     flag: json["flag"],
-    iso3: json["iso3"] == null ? null : json["iso3"],
-    iso2: json["iso2"] == null ? null : json["iso2"],
+    iso3: json["iso3"],
+    iso2: json["iso2"],
   );
 
   Map<String, dynamic> toJson() => {
-    "_id": id == null ? null : id,
+    "_id": id,
     "lat": lat,
     "long": long,
     "flag": flag,
-    "iso3": iso3 == null ? null : iso3,
-    "iso2": iso2 == null ? null : iso2,
+    "iso3": iso3,
+    "iso2": iso2,
   };
 }
