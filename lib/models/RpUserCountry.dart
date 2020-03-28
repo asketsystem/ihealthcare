@@ -62,8 +62,8 @@ class RpUserCountryData {
 
 class CountryInfo {
   int id;
-  int lat;
-  int long;
+  dynamic lat;
+  dynamic long;
   String flag;
   String iso3;
   String iso2;

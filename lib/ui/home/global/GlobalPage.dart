@@ -4,10 +4,12 @@ import 'package:go_away_covid19/models/RpGlobal.dart';
 import 'package:go_away_covid19/models/RpLatest.dart';
 import 'package:go_away_covid19/models/RpUserCountry.dart';
 import 'package:go_away_covid19/network/Repository.dart';
+import 'package:go_away_covid19/ui/countrydetails/CountryDetails.dart';
 import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/util/ShimmerLoading.dart';
 import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalPage extends StatefulWidget {
   @override
@@ -24,20 +26,18 @@ class _GlobalPageState extends State<GlobalPage> {
     super.initState();
 
     _repository.getGloballyLatestData().then((response) {
-      _worldWideLatest = response;
+      setState(() {
+        _worldWideLatest = response;
+      });
     });
 
-    _repository.getUserCountryData("bangladesh").then((response) {
-      _userCountryData = response;
-    });
+    getUserCountryFromSharedPreference();
 
     bloc.getGlobalData();
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: getPageBackgroundColor(),
       body: StreamBuilder(
@@ -107,7 +107,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${latest.cases}',
+                      '${latest.cases == null ? 'Loading...' : latest.cases}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -163,90 +163,96 @@ class _GlobalPageState extends State<GlobalPage> {
   }
 
   Widget buildUserCountryView(RpUserCountryData userCountryData) {
-    return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 15.0,
-            ),
-          ]),
-      child: Column(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.topLeft,
-            child: Container(
-              margin: EdgeInsets.only(left: 25, top: 16),
-              child: Text(
-                '${userCountryData.country == null ? "LOADING..." : userCountryData.country.toUpperCase()}',
-                style: getWorldWideTextStyle(18),
+    return InkWell(
+      onTap: () {
+        navigateToDetailsPage(userCountryData);
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                blurRadius: 15.0,
+              ),
+            ]),
+        child: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 25, top: 16),
+                child: Text(
+                  '${userCountryData.country == null ? "LOADING..." : userCountryData.country.toUpperCase()}',
+                  style: getWorldWideTextStyle(18),
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30, bottom: 20),
-            child: Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 25,
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '${userCountryData.cases}',
-                      style: getWorldWideCountdownNumberStyle(),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Confirmed',
-                      style: getConfirmedRecoveredTextStyle(),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '${userCountryData.recovered}',
-                      style: getWorldWideCountdownNumberStyle(),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Recovered',
-                      style: getConfirmedRecoveredTextStyle(),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '${userCountryData.deaths}',
-                      style: getDeathCountdownNumberStyle(),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Death',
-                      style: getDeathTitleTextStyle(),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 25,
-                ),
-              ],
-            ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.only(top: 30, bottom: 20),
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        '${userCountryData.cases}',
+                        style: getWorldWideCountdownNumberStyle(),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Confirmed',
+                        style: getConfirmedRecoveredTextStyle(),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        '${userCountryData.recovered}',
+                        style: getWorldWideCountdownNumberStyle(),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Recovered',
+                        style: getConfirmedRecoveredTextStyle(),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        '${userCountryData.deaths}',
+                        style: getDeathCountdownNumberStyle(),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Death',
+                        style: getDeathTitleTextStyle(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 25,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -311,5 +317,27 @@ class _GlobalPageState extends State<GlobalPage> {
   String getOnlyCountryName(String country) {
     var splits = country.split(",");
     return splits[0];
+  }
+
+  void getUserCountryFromSharedPreference() async {
+    var preference = await SharedPreferences.getInstance();
+    var userCountry = await preference.getString('userCountry');
+    print('user country: $userCountry');
+    _repository.getUserCountryData(userCountry).then((response) {
+      setState(() {
+        _userCountryData = response;
+      });
+    });
+  }
+
+  void navigateToDetailsPage(RpUserCountryData userCountryData) {
+    var countryDetails = CountryDetails(
+      userCountryData: userCountryData,
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => countryDetails),
+    );
   }
 }

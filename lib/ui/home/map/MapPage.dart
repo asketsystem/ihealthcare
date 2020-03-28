@@ -19,11 +19,11 @@ class _MapPageState extends State<MapPage> {
       body: Stack(
         children: <Widget>[
           WebView(
-            initialUrl: 'about:blank',
+            initialUrl: 'https://www.trackcorona.live/map',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
               _controller = webViewController;
-              loadEmbeddedCode();
+//              loadEmbeddedCode();
             },
             onPageStarted: (url) {
               setState(() {

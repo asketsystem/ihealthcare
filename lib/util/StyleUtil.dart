@@ -8,6 +8,13 @@ getPageTitleTextStyle(double fontSize) {
       fontWeight: FontWeight.w600);
 }
 
+getSelectCountryTextStyle(double fontSize) {
+  return TextStyle(
+      color: Color(0xFF2E3D5F),
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400);
+}
+
 getWorldWideTextStyle(double fontSize) {
   return TextStyle(
       color: Color(0xFFA1ADC7),

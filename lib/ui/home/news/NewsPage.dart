@@ -6,6 +6,7 @@ import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/ui/home/news/NewsBloc.dart';
 import 'package:go_away_covid19/util/ShimmerLoading.dart';
 import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
     bloc.getNewses();
+    removeUserCountry();
   }
 
   @override
@@ -107,5 +109,10 @@ class _NewsPageState extends State<NewsPage> {
         ],
       ),
     );
+  }
+
+  void removeUserCountry() async  {
+    var preference = await SharedPreferences.getInstance();
+    preference.remove('userCountry');
   }
 }
