@@ -64,3 +64,15 @@ getNewsTitleStyle() {
   return TextStyle(
       color: Color(0xFF2E3D5F), fontWeight: FontWeight.w600, fontSize: 14,);
 }
+
+getGraphLegendStyle() {
+  return TextStyle(
+      color: Color(0xFF2E3D5F), fontWeight: FontWeight.w400, fontSize: 14,);
+}
+
+getGraphValueStyle() {
+  return TextStyle(
+      color: Color(0xFFBEC0C6), fontWeight: FontWeight.w600, fontSize: 14,);
+}
+
+
