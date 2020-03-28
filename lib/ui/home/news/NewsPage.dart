@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_away_covid19/models/RpNews.dart';
+import 'package:go_away_covid19/ui/webview/WebViewDetails.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/ui/home/news/NewsBloc.dart';
 import 'package:go_away_covid19/util/ShimmerLoading.dart';
@@ -41,7 +42,14 @@ class _NewsPageState extends State<NewsPage> {
         itemCount: newses.articles.length,
         itemBuilder: (context, index) {
           var news = newses.articles[index];
-          return getSingleNewsView(news);
+          return InkWell(onTap: () {
+            var webViewDetails = WebViewDetails(title: news.title, url: news.url);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => webViewDetails),
+            );
+          }, child: getSingleNewsView(news));
         });
   }
 
@@ -54,8 +62,8 @@ class _NewsPageState extends State<NewsPage> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 15.0,
+              color: Colors.grey.withOpacity(0.2),
+              blurRadius: 10.0,
             ),
           ]),
       child: Column(
