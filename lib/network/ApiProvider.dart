@@ -59,7 +59,7 @@ class ApiProvider {
     }
   }
 
-  Future<RpUserCountryData> getUserCountryData(String country) async {
+  Future<Country> getUserCountryData(String country) async {
     print('getUserCountryData()');
     var response = await client.get('https://corona.lmao.ninja/countries/$country',
         headers: {HttpHeaders.acceptHeader: "application/json"});
@@ -67,7 +67,7 @@ class ApiProvider {
     print("user country data response: ${response.body.toString()}");
 
     if (response.statusCode == 200) {
-      return RpUserCountryData.fromJson(json.decode(response.body));
+      return Country.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to get global data');
     }

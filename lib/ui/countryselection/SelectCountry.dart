@@ -107,6 +107,7 @@ class _SelectCountryState extends State<SelectCountry>
   }
 
   Widget buildCountryList(List<Country> countryList) {
+    countryList.sort((a, b) => a.country.compareTo(b.country));
     return Stack(
       children: <Widget>[
         Padding(

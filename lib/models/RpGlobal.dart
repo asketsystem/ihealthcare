@@ -62,8 +62,8 @@ class Country {
 
 class CountryInfo {
   int id;
-  double lat;
-  double long;
+  dynamic lat;
+  dynamic long;
   String flag;
   String iso3;
   String iso2;

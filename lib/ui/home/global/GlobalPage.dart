@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_away_covid19/models/RpGlobal.dart';
 import 'package:go_away_covid19/models/RpLatest.dart';
-import 'package:go_away_covid19/models/RpUserCountry.dart';
 import 'package:go_away_covid19/network/Repository.dart';
 import 'package:go_away_covid19/ui/countrydetails/CountryDetails.dart';
 import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
@@ -18,7 +17,7 @@ class GlobalPage extends StatefulWidget {
 
 class _GlobalPageState extends State<GlobalPage> {
   var _repository = Repository();
-  var _userCountryData = RpUserCountryData();
+  var _userCountryData = Country();
   var _worldWideLatest = RpLatest();
 
   @override
@@ -107,7 +106,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${latest.cases == null ? 'Loading...' : latest.cases}',
+                      '${latest.cases == null ? '0000000' : latest.cases}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -123,7 +122,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${latest.recovered == 0 ? '0000' : latest.recovered}',
+                      '${latest.recovered == null ? '0000000' : latest.recovered}',
                       style: getWorldWideCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -139,7 +138,7 @@ class _GlobalPageState extends State<GlobalPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      '${latest.deaths}',
+                      '${latest.deaths == null ? '00000' : latest.deaths}',
                       style: getDeathCountdownNumberStyle(),
                     ),
                     SizedBox(
@@ -162,7 +161,7 @@ class _GlobalPageState extends State<GlobalPage> {
     );
   }
 
-  Widget buildUserCountryView(RpUserCountryData userCountryData) {
+  Widget buildUserCountryView(Country userCountryData) {
     return InkWell(
       onTap: () {
         navigateToDetailsPage(userCountryData);
@@ -186,7 +185,7 @@ class _GlobalPageState extends State<GlobalPage> {
               child: Container(
                 margin: EdgeInsets.only(left: 25, top: 16),
                 child: Text(
-                  '${userCountryData.country == null ? "LOADING..." : userCountryData.country.toUpperCase()}',
+                  '${userCountryData.country == null ? "..." : userCountryData.country.toUpperCase()}',
                   style: getWorldWideTextStyle(18),
                 ),
               ),
@@ -201,7 +200,7 @@ class _GlobalPageState extends State<GlobalPage> {
                   Column(
                     children: <Widget>[
                       Text(
-                        '${userCountryData.cases}',
+                        '${userCountryData.cases == null ? "..." : userCountryData.cases}',
                         style: getWorldWideCountdownNumberStyle(),
                       ),
                       SizedBox(
@@ -217,7 +216,7 @@ class _GlobalPageState extends State<GlobalPage> {
                   Column(
                     children: <Widget>[
                       Text(
-                        '${userCountryData.recovered}',
+                        '${userCountryData.recovered == null ? "..." : userCountryData.recovered}',
                         style: getWorldWideCountdownNumberStyle(),
                       ),
                       SizedBox(
@@ -233,7 +232,7 @@ class _GlobalPageState extends State<GlobalPage> {
                   Column(
                     children: <Widget>[
                       Text(
-                        '${userCountryData.deaths}',
+                        '${userCountryData.deaths == null ? "..." : userCountryData.deaths}',
                         style: getDeathCountdownNumberStyle(),
                       ),
                       SizedBox(
@@ -258,57 +257,60 @@ class _GlobalPageState extends State<GlobalPage> {
   }
 
   Widget buildSingleCountryView(Country country) {
-    print('flag: ${country.countryInfo.flag}');
-
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-      child: Container(
-        height: 80,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                blurRadius: 15.0,
+    return InkWell(
+      onTap: () {
+        navigateToDetailsPage(country);
+      },
+      child: Padding(
+        padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        child: Container(
+          height: 80,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 15.0,
+                ),
+              ]),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: 25,
               ),
-            ]),
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              width: 25,
-            ),
-            Container(
-              height: 35,
-              width: 55,
-              child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
-                      ),
-                  errorWidget: (context, url, error) => Container(
-                      color: Colors.grey.withOpacity(0.2),
-                      child: Center(
-                          child: Icon(
-                        Icons.broken_image,
-                        size: 50.0,
-                        color: Colors.grey.withOpacity(0.5),
-                      ))),
-                  imageUrl: "${country.countryInfo.flag}"),
-            ),
-            SizedBox(
-              width: 25,
-            ),
-            Text('${getOnlyCountryName(country.country)}',
-                style: getCountryNameInListStyle()),
-            Spacer(),
-            Center(
-                child: Text(
-              '${country.cases}',
-              style: getCountryInListCasesStyle(),
-            )),
-            SizedBox(width: 25)
-          ],
+              Container(
+                height: 35,
+                width: 55,
+                child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                          color: Colors.grey[200],
+                        ),
+                    errorWidget: (context, url, error) => Container(
+                        color: Colors.grey.withOpacity(0.2),
+                        child: Center(
+                            child: Icon(
+                          Icons.broken_image,
+                          size: 50.0,
+                          color: Colors.grey.withOpacity(0.5),
+                        ))),
+                    imageUrl: "${country.countryInfo.flag}"),
+              ),
+              SizedBox(
+                width: 25,
+              ),
+              Text('${getOnlyCountryName(country.country)}',
+                  style: getCountryNameInListStyle()),
+              Spacer(),
+              Center(
+                  child: Text(
+                '${country.cases}',
+                style: getCountryInListCasesStyle(),
+              )),
+              SizedBox(width: 25)
+            ],
+          ),
         ),
       ),
     );
@@ -330,14 +332,13 @@ class _GlobalPageState extends State<GlobalPage> {
     });
   }
 
-  void navigateToDetailsPage(RpUserCountryData userCountryData) {
+  void navigateToDetailsPage(Country country) {
     var countryDetails = CountryDetails(
-      userCountryData: userCountryData,
+      country: country,
     );
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => countryDetails),
+      MaterialPageRoute(builder: (context) => countryDetails),
     );
   }
 }

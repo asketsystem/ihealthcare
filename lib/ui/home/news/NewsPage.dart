@@ -18,7 +18,6 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
     bloc.getNewses();
-    removeUserCountry();
   }
 
   @override
@@ -111,8 +110,4 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  void removeUserCountry() async  {
-    var preference = await SharedPreferences.getInstance();
-    preference.remove('userCountry');
-  }
 }

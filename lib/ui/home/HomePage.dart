@@ -5,6 +5,7 @@ import 'package:go_away_covid19/ui/home/map/MapPage.dart';
 import 'package:go_away_covid19/ui/home/news/NewsPage.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,7 +29,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: currentTab == 3 ? Colors.white : getPageBackgroundColor(),
+        backgroundColor:
+            currentTab == 3 ? Colors.white : getPageBackgroundColor(),
         title: Row(
           children: <Widget>[
             Container(
@@ -42,7 +44,12 @@ class _HomePageState extends State<HomePage> {
                   )),
             ),
             Spacer(),
-            Text(getPageTitle(currentTab), style: getPageTitleTextStyle(18.0))
+            InkWell(
+                onTap: () {
+                  removeUserCountry();
+                },
+                child: Text(getPageTitle(currentTab),
+                    style: getPageTitleTextStyle(18.0)))
           ],
         ),
       ),
@@ -137,4 +144,10 @@ class _HomePageState extends State<HomePage> {
     });
     return pageTitle;
   }
+}
+
+
+void removeUserCountry() async  {
+  var preference = await SharedPreferences.getInstance();
+  preference.remove('userCountry');
 }

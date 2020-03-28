@@ -1,17 +1,15 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/models/RpUserCountry.dart';
+import 'package:go_away_covid19/models/RpGlobal.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/util/StyleUtil.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:pie_chart/pie_chart.dart';
 
 class CountryDetails extends StatefulWidget {
-  RpUserCountryData userCountryData;
 
-  CountryDetails({this.userCountryData});
+  Country country;
+
+  CountryDetails({this.country});
 
   @override
   _CountryDetailsState createState() => _CountryDetailsState();
@@ -22,7 +20,7 @@ class _CountryDetailsState extends State<CountryDetails> {
   final casesColor = Color(0xFF2C94FC);
   final recoveredColor = Color(0xFF2ECCE3);
   final deathsColor = Color(0xFFF73E3E);
-  RpUserCountryData userCountryData;
+  Country userCountryData;
 
   Map<String, double> dataMap = new Map();
   List<Color> graphColorList = [];
@@ -35,7 +33,7 @@ class _CountryDetailsState extends State<CountryDetails> {
     graphColorList.add(recoveredColor);
     graphColorList.add(deathsColor);
 
-    userCountryData = widget.userCountryData;
+    userCountryData = widget.country;
     dataMap.putIfAbsent("Confirmed", () => userCountryData.cases.toDouble());
     dataMap.putIfAbsent("Recovered", () => userCountryData.recovered.toDouble());
     dataMap.putIfAbsent("Deaths", () => userCountryData.deaths.toDouble());
@@ -58,7 +56,7 @@ class _CountryDetailsState extends State<CountryDetails> {
       ),
       body: Container(
         color: getPageBackgroundColor(),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             getUserCountryStats(),
             getPieChart(),

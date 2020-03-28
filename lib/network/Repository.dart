@@ -9,6 +9,6 @@ class Repository {
 
   Future<RpLatest> getGloballyLatestData() => apiProvider.getGloballyLatestData();
   Future<List<Country>> getAllCountriesData() => apiProvider.getAllCountriesData();
-  Future<RpUserCountryData> getUserCountryData(String countryCode) => apiProvider.getUserCountryData(countryCode);
+  Future<Country> getUserCountryData(String countryCode) => apiProvider.getUserCountryData(countryCode);
   Future<RpNews> getNewses() => apiProvider.getNewses();
 }
