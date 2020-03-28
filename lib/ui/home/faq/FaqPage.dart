@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_away_covid19/ui/webview/WebViewDetails.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
 import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class FaqPage extends StatefulWidget {
   @override
@@ -8,6 +10,13 @@ class FaqPage extends StatefulWidget {
 }
 
 class _FaqPageState extends State<FaqPage> {
+
+  var howItSpreadsUrl = "https://www.cdc.gov/coronavirus/2019-ncov/prepare/transmission.html";
+  var symptomsUrl = "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html";
+  var howToUseMaskUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks";
+  var mediaResourcesUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/media-resources/press-briefings";
+  var adviceForPublicUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,28 +24,63 @@ class _FaqPageState extends State<FaqPage> {
       body: ListView(
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: () {
+              var webViewDetails = WebViewDetails(title: 'How it spreads?', url: howItSpreadsUrl);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => webViewDetails),
+              );
+            },
             child: getSingleFaqView('How it spreads?',
                 'Learn how Covid-19 spreads', 'images/faq_howitspreads.png'),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              var webViewDetails = WebViewDetails(title: 'Symptoms', url: symptomsUrl);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => webViewDetails),
+              );
+            },
             child: getSingleFaqView('Symptoms',
                 'Learn Covid-19 symptoms', 'images/faq_symptoms.png'),
           ),
           InkWell(
-            onTap: () {},
-            child: getSingleFaqView('Protect yourself',
-                'Learn to protect others', 'images/faq_protectyourself.png'),
+            onTap: () {
+              var webViewDetails = WebViewDetails(title: 'How to use Mask?', url: howToUseMaskUrl);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => webViewDetails),
+              );
+            },
+            child: getSingleFaqView('How to use Mask?',
+                'When & How to use Mask.', 'images/faq_protectyourself.png'),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              var webViewDetails = WebViewDetails(title: 'Media resources', url: mediaResourcesUrl);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => webViewDetails),
+              );
+            },
             child: getSingleFaqView('Media resources',
                 'Visit to get the resources', 'images/faq_mediaresources.png'),
           ),
           InkWell(
-            onTap: () {},
-            child: getSingleFaqView('Myth busters',
+            onTap: () {
+              var webViewDetails = WebViewDetails(title: 'Advice for public', url: adviceForPublicUrl);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => webViewDetails),
+              );
+            },
+            child: getSingleFaqView('Advice for public',
                 'WHO advice for public', 'images/faq_mythbusters.png'),
           ),
         ],

@@ -43,7 +43,7 @@ class _MapPageState extends State<MapPage> {
   }
 
   String getEmbeddedCode() {
-    return '<!DOCTYPE html> <html> <head><title>Page Title</title> <style>body {background-color: white;text-align: center;color: white;font-family: Arial, Helvetica, sans-serif;}</style></head> <body> <p><a href="https://commons.wikimedia.org/wiki/File:COVID-19_Outbreak_World_Map_per_Capita.svg#/media/File:COVID-19_Outbreak_World_Map_per_Capita.svg"><img style="width:5100px;height:2500px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/COVID-19_Outbreak_World_Map_per_Capita.svg/1200px-COVID-19_Outbreak_World_Map_per_Capita.svg.png" alt="COVID-19 Outbreak World Map per Capita.svg"></a></p></body></html>';
+    return '<!DOCTYPE html> <html> <head><title>Page Title</title> <style>body {background-color: white;text-align: center;color: white;font-family: Arial, Helvetica, sans-serif;}</style></head> <body> <p><a href="https://commons.wikimedia.org/wiki/File:COVID-19_Outbreak_World_Map_per_Capita.svg#/media/File:COVID-19_Outbreak_World_Map_per_Capita.svg"><img style="width:4600px;height:2000px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/COVID-19_Outbreak_World_Map_per_Capita.svg/1200px-COVID-19_Outbreak_World_Map_per_Capita.svg.png" alt="COVID-19 Outbreak World Map per Capita.svg"></a></p></body></html>';
   }
 
   void loadEmbeddedCode() {
