@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_away_covid19/models/RpGlobal.dart';
+import 'package:go_away_covid19/network/Repository.dart';
 import 'package:go_away_covid19/ui/home/HomePage.dart';
 import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
 import 'package:go_away_covid19/util/ColorUtil.dart';
@@ -19,7 +20,8 @@ class _SelectCountryState extends State<SelectCountry>
 
   AnimationController controller;
   Animation<Offset> offset;
-  
+  var _repository = Repository();
+
   @override
   void initState() {
     super.initState();
@@ -83,8 +85,8 @@ class _SelectCountryState extends State<SelectCountry>
                         blurRadius: 15.0,
                       ),
                     ]),
-                child: StreamBuilder(
-                  stream: bloc.globalFetcher,
+                child: FutureBuilder(
+                  future: _repository.getAllCountriesData(),
                   builder: (context, AsyncSnapshot<List<Country>> snapshot) {
                     if (snapshot.hasData) {
                       return buildCountryList(snapshot.data);

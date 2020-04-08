@@ -58,15 +58,14 @@ class _GlobalPageState extends State<GlobalPage> {
   Widget buildList(List<Country> allCountryData) {
     return ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: allCountryData.length, //2 is for above list
+        itemCount: allCountryData.length + 2 , //2 is for above list
         itemBuilder: (context, index) {
-          var country = allCountryData[index];
-
           if (index == 0) {
             return buildGlobalView(_worldWideLatest);
           } else if (index == 1) {
             return buildUserCountryView(_userCountryData);
           } else {
+            var country = allCountryData[index - 2];
             return buildSingleCountryView(country);
           }
         });
