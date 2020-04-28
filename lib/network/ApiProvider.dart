@@ -16,7 +16,7 @@ class ApiProvider {
 
   Future<List<Country>> getAllCountriesData() async {
     print('getGlobalData()');
-    var response = await client.get('https://corona.lmao.ninja/countries?sort=cases',
+    var response = await client.get('https://corona.lmao.ninja/v2/countries?sort=cases',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("global data response: ${response.body.toString()}");
@@ -30,7 +30,7 @@ class ApiProvider {
 
   Future<RpLatest> getGloballyLatestData() async {
     print('getGloballyLatestData()');
-    var response = await client.get('https://corona.lmao.ninja/all',
+    var response = await client.get('https://corona.lmao.ninja/v2/all',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("global data response: ${response.body.toString()}");
@@ -61,7 +61,7 @@ class ApiProvider {
 
   Future<Country> getUserCountryData(String country) async {
     print('getUserCountryData()');
-    var response = await client.get('https://corona.lmao.ninja/countries/$country',
+    var response = await client.get('https://corona.lmao.ninja/v2/countries/$country',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("user country data response: ${response.body.toString()}");
