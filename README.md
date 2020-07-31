@@ -1,6 +1,6 @@
-# ihealthcare
+# ihealthcare is a coronavirus tracker app.., also a medical tracker 
 
-A new Flutter application.
+A Flutter application.
 
 ## Getting Started
 
