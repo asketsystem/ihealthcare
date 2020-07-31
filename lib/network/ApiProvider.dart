@@ -1,22 +1,26 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:go_away_covid19/models/RpGlobal.dart';
-import 'package:go_away_covid19/models/RpLatest.dart';
-import 'package:go_away_covid19/models/RpNews.dart';
-import 'package:go_away_covid19/models/RpUserCountry.dart';
+import 'package:ihealthcare/models/RpGlobal.dart';
+import 'package:ihealthcare/models/RpLatest.dart';
+import 'package:ihealthcare/models/RpNews.dart';
+// ignore: unused_import
+import 'package:ihealthcare/models/RpUserCountry.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
 class ApiProvider {
   Client client = new Client();
+  // ignore: unused_field
   final _covid19DataSource = "https://coronavirus-tracker-api.herokuapp.com/v2";
+  // ignore: unused_field
   final _newsDataSource =
       "http://newsapi.org/v2/everything?q=COVID&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=2020-03-27&sortBy=publishedAt&page=1&language=en";
 
   Future<List<Country>> getAllCountriesData() async {
     print('getGlobalData()');
-    var response = await client.get('https://corona.lmao.ninja/v2/countries?sort=cases',
+    var response = await client.get(
+        'https://corona.lmao.ninja/v2/countries?sort=cases',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("global data response: ${response.body.toString()}");
@@ -46,8 +50,10 @@ class ApiProvider {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
-    print('getNewses() from: http://newsapi.org/v2/everything?q=coronavirus&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en');
-    var response = await client.get('http://newsapi.org/v2/everything?q=COVID&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en',
+    print(
+        'getNewses() from: http://newsapi.org/v2/everything?q=coronavirus&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en');
+    var response = await client.get(
+        'http://newsapi.org/v2/everything?q=COVID&apiKey=a8e98ea61ecc4aa69be04b13de6508bd&from=$formattedDate&sortBy=publishedAt&page=1&language=en',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("newses response: ${response.body.toString()}");
@@ -61,7 +67,8 @@ class ApiProvider {
 
   Future<Country> getUserCountryData(String country) async {
     print('getUserCountryData()');
-    var response = await client.get('https://corona.lmao.ninja/v2/countries/$country',
+    var response = await client.get(
+        'https://corona.lmao.ninja/v2/countries/$country',
         headers: {HttpHeaders.acceptHeader: "application/json"});
 
     print("user country data response: ${response.body.toString()}");

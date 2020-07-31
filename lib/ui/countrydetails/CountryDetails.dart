@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/models/RpGlobal.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/models/RpGlobal.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+// ignore: must_be_immutable
 class CountryDetails extends StatefulWidget {
-
   Country country;
 
   CountryDetails({this.country});
@@ -16,7 +16,6 @@ class CountryDetails extends StatefulWidget {
 }
 
 class _CountryDetailsState extends State<CountryDetails> {
-
   final casesColor = Color(0xFF2C94FC);
   final recoveredColor = Color(0xFF2ECCE3);
   final deathsColor = Color(0xFFF73E3E);
@@ -35,7 +34,8 @@ class _CountryDetailsState extends State<CountryDetails> {
 
     userCountryData = widget.country;
     dataMap.putIfAbsent("Confirmed", () => userCountryData.cases.toDouble());
-    dataMap.putIfAbsent("Recovered", () => userCountryData.recovered.toDouble());
+    dataMap.putIfAbsent(
+        "Recovered", () => userCountryData.recovered.toDouble());
     dataMap.putIfAbsent("Deaths", () => userCountryData.deaths.toDouble());
   }
 
@@ -69,10 +69,7 @@ class _CountryDetailsState extends State<CountryDetails> {
 
   Widget getUserCountryStats() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(left: 15, right: 15, bottom: 25),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -94,19 +91,17 @@ class _CountryDetailsState extends State<CountryDetails> {
                 width: 30,
                 child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        Container(
+                    placeholder: (context, url) => Container(
                           color: Colors.grey[200],
                         ),
-                    errorWidget: (context, url, error) =>
-                        Container(
-                            color: Colors.grey.withOpacity(0.2),
-                            child: Center(
-                                child: Icon(
-                                  Icons.broken_image,
-                                  size: 50.0,
-                                  color: Colors.grey.withOpacity(0.5),
-                                ))),
+                    errorWidget: (context, url, error) => Container(
+                        color: Colors.grey.withOpacity(0.2),
+                        child: Center(
+                            child: Icon(
+                          Icons.broken_image,
+                          size: 50.0,
+                          color: Colors.grey.withOpacity(0.5),
+                        ))),
                     imageUrl: "${userCountryData.countryInfo.flag}"),
               ),
             ),
@@ -224,13 +219,21 @@ class _CountryDetailsState extends State<CountryDetails> {
           ]),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           getLegend(casesColor, "Confirmed Cases"),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           getLegend(recoveredColor, "Recovered"),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           getLegend(deathsColor, "Death"),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
         ],
       ),
     );
@@ -240,7 +243,9 @@ class _CountryDetailsState extends State<CountryDetails> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 30,),
+          SizedBox(
+            width: 30,
+          ),
           Container(
             height: 10,
             width: 10,
@@ -249,13 +254,22 @@ class _CountryDetailsState extends State<CountryDetails> {
               color: color,
             ),
           ),
-          SizedBox(width: 20,),
-          Text(legendLabel, style: getGraphLegendStyle(),
-            textAlign: TextAlign.left,),
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            legendLabel,
+            style: getGraphLegendStyle(),
+            textAlign: TextAlign.left,
+          ),
           Spacer(),
-          Text(getGraphValueInPercentage(legendLabel),
-            style: getGraphValueStyle(),),
-          SizedBox(width: 30,),
+          Text(
+            getGraphValueInPercentage(legendLabel),
+            style: getGraphValueStyle(),
+          ),
+          SizedBox(
+            width: 30,
+          ),
         ],
       ),
     );
@@ -263,15 +277,19 @@ class _CountryDetailsState extends State<CountryDetails> {
 
   String getGraphValueInPercentage(String legendLabel) {
     String value = "0";
-    int total = userCountryData.cases + userCountryData.recovered +
+    int total = userCountryData.cases +
+        userCountryData.recovered +
         userCountryData.deaths;
 
     if (legendLabel == 'Confirmed Cases') {
-      value = '${getPercentage(total, userCountryData.cases).toStringAsFixed(1)}%';
+      value =
+          '${getPercentage(total, userCountryData.cases).toStringAsFixed(1)}%';
     } else if (legendLabel == 'Recovered') {
-      value = '${getPercentage(total, userCountryData.recovered).toStringAsFixed(1)}%';
+      value =
+          '${getPercentage(total, userCountryData.recovered).toStringAsFixed(1)}%';
     } else {
-      value = '${getPercentage(total, userCountryData.deaths).toStringAsFixed(1)}%';
+      value =
+          '${getPercentage(total, userCountryData.deaths).toStringAsFixed(1)}%';
     }
     return value;
   }

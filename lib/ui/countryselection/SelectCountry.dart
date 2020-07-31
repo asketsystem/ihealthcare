@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/models/RpGlobal.dart';
-import 'package:go_away_covid19/network/Repository.dart';
-import 'package:go_away_covid19/ui/home/HomePage.dart';
-import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/models/RpGlobal.dart';
+import 'package:ihealthcare/network/Repository.dart';
+import 'package:ihealthcare/ui/home/HomePage.dart';
+import 'package:ihealthcare/ui/home/global/GlobalBloc.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectCountry extends StatefulWidget {
@@ -30,8 +30,8 @@ class _SelectCountryState extends State<SelectCountry>
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
-    offset =
-        Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 0.1)).animate(controller);
+    offset = Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 0.1))
+        .animate(controller);
   }
 
   @override
@@ -154,7 +154,6 @@ class _SelectCountryState extends State<SelectCountry>
                           setCountryName();
                           gotoHomePage();
                         });
-                        
                       },
                       color: Colors.black,
                       child: Center(
@@ -204,7 +203,12 @@ class _SelectCountryState extends State<SelectCountry>
       context,
       PageRouteBuilder(
         transitionDuration: Duration(milliseconds: 800),
-        pageBuilder: (_, __, ___,) => HomePage(),
+        pageBuilder: (
+          _,
+          __,
+          ___,
+        ) =>
+            HomePage(),
       ),
     );
   }

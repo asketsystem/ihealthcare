@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/models/RpNews.dart';
-import 'package:go_away_covid19/ui/webview/WebViewDetails.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/ui/home/news/NewsBloc.dart';
-import 'package:go_away_covid19/util/ShimmerLoading.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/models/RpNews.dart';
+import 'package:ihealthcare/ui/webview/WebViewDetails.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/ui/home/news/NewsBloc.dart';
+import 'package:ihealthcare/util/ShimmerLoading.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
+// ignore: unused_import
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NewsPage extends StatefulWidget {
@@ -43,14 +44,16 @@ class _NewsPageState extends State<NewsPage> {
         itemCount: newses.articles.length,
         itemBuilder: (context, index) {
           var news = newses.articles[index];
-          return InkWell(onTap: () {
-            var webViewDetails = WebViewDetails(title: news.title, url: news.url);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => webViewDetails),
-            );
-          }, child: getSingleNewsView(news));
+          return InkWell(
+              onTap: () {
+                var webViewDetails =
+                    WebViewDetails(title: news.title, url: news.url);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => webViewDetails),
+                );
+              },
+              child: getSingleNewsView(news));
         });
   }
 
@@ -109,5 +112,4 @@ class _NewsPageState extends State<NewsPage> {
       ),
     );
   }
-
 }

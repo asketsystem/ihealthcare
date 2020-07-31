@@ -2,22 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_away_covid19/ui/countryselection/SelectCountry.dart';
-import 'package:go_away_covid19/ui/home/HomePage.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
+import 'package:ihealthcare/ui/countryselection/SelectCountry.dart';
+import 'package:ihealthcare/ui/home/HomePage.dart';
+// ignore: unused_import
+import 'package:ihealthcare/util/ColorUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'ui/countryselection/SelectCountry.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
-      title: 'Go Away Covid19',
+      title: 'ihealthcare',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -52,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
           height: 100,
           child: Hero(
             tag: "ic_goaway",
-            child: Image.asset('images/ic_go_away.png'),
+            child: Image.asset('images/ihealthcare.png'),
           ),
         ),
       ),
@@ -61,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void decideWhichPageToGo() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    if(preferences.containsKey('userCountry')) {
+    if (preferences.containsKey('userCountry')) {
       gotoHomePage();
     } else {
       gotoSelectCountryPage();
@@ -73,7 +73,12 @@ class _SplashPageState extends State<SplashPage> {
       context,
       PageRouteBuilder(
         transitionDuration: Duration(milliseconds: 800),
-        pageBuilder: (_, __, ___,) => HomePage(),
+        pageBuilder: (
+          _,
+          __,
+          ___,
+        ) =>
+            HomePage(),
       ),
     );
   }
@@ -83,7 +88,12 @@ class _SplashPageState extends State<SplashPage> {
       context,
       PageRouteBuilder(
         transitionDuration: Duration(milliseconds: 800),
-        pageBuilder: (_, __, ___,) => SelectCountry(),
+        pageBuilder: (
+          _,
+          __,
+          ___,
+        ) =>
+            SelectCountry(),
       ),
     );
   }

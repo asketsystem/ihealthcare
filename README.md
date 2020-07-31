@@ -1,4 +1,4 @@
-# go_away_covid19
+# ihealthcare
 
 A new Flutter application.
 

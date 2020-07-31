@@ -1,4 +1,4 @@
-package com.invalidco.go_away_covid19
+package com.invalidco.ihealthcare
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

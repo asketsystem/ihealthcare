@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/ui/home/faq/FaqPage.dart';
-import 'package:go_away_covid19/ui/home/global/GlobalPage.dart';
-import 'package:go_away_covid19/ui/home/map/MapPage.dart';
-import 'package:go_away_covid19/ui/home/news/NewsPage.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/ui/home/faq/FaqPage.dart';
+import 'package:ihealthcare/ui/home/global/GlobalPage.dart';
+import 'package:ihealthcare/ui/home/map/MapPage.dart';
+import 'package:ihealthcare/ui/home/news/NewsPage.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -146,8 +146,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
-void removeUserCountry() async  {
+void removeUserCountry() async {
   var preference = await SharedPreferences.getInstance();
   preference.remove('userCountry');
 }

@@ -1,6 +1,5 @@
-
-import 'package:go_away_covid19/models/RpNews.dart';
-import 'package:go_away_covid19/network/Repository.dart';
+import 'package:ihealthcare/models/RpNews.dart';
+import 'package:ihealthcare/network/Repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 final bloc = NewsBloc();
@@ -15,8 +14,8 @@ class NewsBloc {
     RpNews newses = await _repository.getNewses();
     newsFetcher.sink.add(newses);
   }
+
   dispose() {
     newsFetcher.close();
   }
-
 }

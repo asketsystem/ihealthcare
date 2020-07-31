@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MapPage extends StatefulWidget {

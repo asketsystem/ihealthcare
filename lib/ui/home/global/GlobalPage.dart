@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/models/RpGlobal.dart';
-import 'package:go_away_covid19/models/RpLatest.dart';
-import 'package:go_away_covid19/network/Repository.dart';
-import 'package:go_away_covid19/ui/countrydetails/CountryDetails.dart';
-import 'package:go_away_covid19/ui/home/global/GlobalBloc.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/ShimmerLoading.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/models/RpGlobal.dart';
+import 'package:ihealthcare/models/RpLatest.dart';
+import 'package:ihealthcare/network/Repository.dart';
+import 'package:ihealthcare/ui/countrydetails/CountryDetails.dart';
+import 'package:ihealthcare/ui/home/global/GlobalBloc.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/ShimmerLoading.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalPage extends StatefulWidget {
@@ -58,7 +58,7 @@ class _GlobalPageState extends State<GlobalPage> {
   Widget buildList(List<Country> allCountryData) {
     return ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: allCountryData.length + 2 , //2 is for above list
+        itemCount: allCountryData.length + 2, //2 is for above list
         itemBuilder: (context, index) {
           if (index == 0) {
             return buildGlobalView(_worldWideLatest);
@@ -322,6 +322,7 @@ class _GlobalPageState extends State<GlobalPage> {
 
   void getUserCountryFromSharedPreference() async {
     var preference = await SharedPreferences.getInstance();
+    // ignore: await_only_futures
     var userCountry = await preference.getString('userCountry');
     print('user country: $userCountry');
     _repository.getUserCountryData(userCountry).then((response) {

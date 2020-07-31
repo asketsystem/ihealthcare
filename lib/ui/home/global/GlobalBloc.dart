@@ -1,5 +1,5 @@
-import 'package:go_away_covid19/models/RpGlobal.dart';
-import 'package:go_away_covid19/network/Repository.dart';
+import 'package:ihealthcare/models/RpGlobal.dart';
+import 'package:ihealthcare/network/Repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 final bloc = GlobalBloc();

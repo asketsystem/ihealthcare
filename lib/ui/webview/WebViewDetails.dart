@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+// ignore: must_be_immutable
 class WebViewDetails extends StatefulWidget {
   String title;
   String url;
@@ -18,6 +19,7 @@ class _WebViewDetailsState extends State<WebViewDetails> {
   String title;
   String url;
 
+  // ignore: unused_field
   WebViewController _controller;
   bool isLoading = true;
 

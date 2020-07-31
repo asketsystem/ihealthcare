@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_away_covid19/ui/webview/WebViewDetails.dart';
-import 'package:go_away_covid19/util/ColorUtil.dart';
-import 'package:go_away_covid19/util/StyleUtil.dart';
+import 'package:ihealthcare/ui/webview/WebViewDetails.dart';
+import 'package:ihealthcare/util/ColorUtil.dart';
+import 'package:ihealthcare/util/StyleUtil.dart';
+// ignore: unused_import
 import 'package:webview_flutter/webview_flutter.dart';
 
 class FaqPage extends StatefulWidget {
@@ -10,12 +11,16 @@ class FaqPage extends StatefulWidget {
 }
 
 class _FaqPageState extends State<FaqPage> {
-
-  var howItSpreadsUrl = "https://www.cdc.gov/coronavirus/2019-ncov/prepare/transmission.html";
-  var symptomsUrl = "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html";
-  var howToUseMaskUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks";
-  var mediaResourcesUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/media-resources/press-briefings";
-  var adviceForPublicUrl = "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public";
+  var howItSpreadsUrl =
+      "https://www.cdc.gov/coronavirus/2019-ncov/prepare/transmission.html";
+  var symptomsUrl =
+      "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html";
+  var howToUseMaskUrl =
+      "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks";
+  var mediaResourcesUrl =
+      "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/media-resources/press-briefings";
+  var adviceForPublicUrl =
+      "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public";
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +30,11 @@ class _FaqPageState extends State<FaqPage> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              var webViewDetails = WebViewDetails(title: 'How it spreads?', url: howItSpreadsUrl);
+              var webViewDetails = WebViewDetails(
+                  title: 'How it spreads?', url: howItSpreadsUrl);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => webViewDetails),
+                MaterialPageRoute(builder: (context) => webViewDetails),
               );
             },
             child: getSingleFaqView('How it spreads?',
@@ -37,23 +42,23 @@ class _FaqPageState extends State<FaqPage> {
           ),
           InkWell(
             onTap: () {
-              var webViewDetails = WebViewDetails(title: 'Symptoms', url: symptomsUrl);
+              var webViewDetails =
+                  WebViewDetails(title: 'Symptoms', url: symptomsUrl);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => webViewDetails),
+                MaterialPageRoute(builder: (context) => webViewDetails),
               );
             },
-            child: getSingleFaqView('Symptoms',
-                'Learn Covid-19 symptoms', 'images/faq_symptoms.png'),
+            child: getSingleFaqView('Symptoms', 'Learn Covid-19 symptoms',
+                'images/faq_symptoms.png'),
           ),
           InkWell(
             onTap: () {
-              var webViewDetails = WebViewDetails(title: 'How to use Mask?', url: howToUseMaskUrl);
+              var webViewDetails = WebViewDetails(
+                  title: 'How to use Mask?', url: howToUseMaskUrl);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => webViewDetails),
+                MaterialPageRoute(builder: (context) => webViewDetails),
               );
             },
             child: getSingleFaqView('How to use Mask?',
@@ -61,11 +66,11 @@ class _FaqPageState extends State<FaqPage> {
           ),
           InkWell(
             onTap: () {
-              var webViewDetails = WebViewDetails(title: 'Media resources', url: mediaResourcesUrl);
+              var webViewDetails = WebViewDetails(
+                  title: 'Media resources', url: mediaResourcesUrl);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => webViewDetails),
+                MaterialPageRoute(builder: (context) => webViewDetails),
               );
             },
             child: getSingleFaqView('Media resources',
@@ -73,11 +78,11 @@ class _FaqPageState extends State<FaqPage> {
           ),
           InkWell(
             onTap: () {
-              var webViewDetails = WebViewDetails(title: 'Advice for public', url: adviceForPublicUrl);
+              var webViewDetails = WebViewDetails(
+                  title: 'Advice for public', url: adviceForPublicUrl);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => webViewDetails),
+                MaterialPageRoute(builder: (context) => webViewDetails),
               );
             },
             child: getSingleFaqView('Advice for public',
