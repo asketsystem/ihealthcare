@@ -49,7 +49,7 @@ class _SelectCountryState extends State<SelectCountry>
               child: Hero(
                   tag: "ic_goaway",
                   child: Image.asset(
-                    'images/ic_go_away.png',
+                    'images/ihealthcare.png',
                     fit: BoxFit.cover,
                   )),
             ),

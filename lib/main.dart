@@ -51,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Container(
           height: 100,
           child: Hero(
-            tag: "ic_goaway",
+            tag: "ihealthcare",
             child: Image.asset('images/ihealthcare.png'),
           ),
         ),
