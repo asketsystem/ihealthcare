@@ -11,7 +11,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ui/countryselection/SelectCountry.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://8d4b7a0c3a61468088136bb680b43620@o528379.ingest.sentry.io/5645701';
+    },
+    appRunner: () => runApp(MyApp()),
+  );
+}
 
 class MyApp extends StatelessWidget {
   @override
